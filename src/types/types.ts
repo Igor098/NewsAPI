@@ -20,3 +20,8 @@ export interface INewsItemState {
     publishedAt: string;
     content: string;
 }
+
+export interface IStore {
+    news: INewsItemState;
+    favouriteNews: INewsItemState;
+}
