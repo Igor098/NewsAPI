@@ -1,30 +1,33 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {fetchNews} from "../../api/newsAPI.ts";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { fetchNews } from "../../api/newsAPI.ts";
+import { INewsItemSource, INewsState } from "../../types/types.ts";
+
+
+const initialState: INewsState = {
+    articles: [],
+    loading: false,
+    error: null,
+    category: 'general',
+    searchQuery: '',
+}
 
 export const loadNews = createAsyncThunk(
     'news/loadNews',
-    async (searchQuery: string) => {
-        return await fetchNews(searchQuery);
+    async (category: string): Promise<INewsItemSource> => {
+        return await fetchNews(category);
     }
-
 )
 
 export const newsSlice = createSlice({
     name: "news",
-    initialState: {
-        articles: [],
-        loading: false,
-        error: null,
-        category: 'general',
-        searchQuery: '',
-    },
+    initialState,
 
     reducers: {
-        setCategory: (state, action) => {
-            state.category = action.payload.category;
+        setCategory: (state, action: PayloadAction<string>) => {
+            state.category = action.payload;
         },
 
-        setSearchQuery: (state, action) => {
+        setSearchQuery: (state, action: PayloadAction<string>) => {
             state.searchQuery = action.payload;
         }
     },
@@ -36,18 +39,14 @@ export const newsSlice = createSlice({
                 state.error = null;
             })
 
-            .addCase(loadNews.fulfilled, (state, action) => {
+            .addCase(loadNews.fulfilled, (state, action: PayloadAction<INewsItemSource>) => {
                 state.loading = false;
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-expect-error
-                state.articles = action.payload;
+                state.articles = action.payload.articles;
             })
 
             .addCase(loadNews.rejected, (state, action) => {
                 state.loading = false;
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-expect-error
-                state.error = action.error.message;
+                state.error = action.error.message || 'Something went wrong';
             })
     }
 })

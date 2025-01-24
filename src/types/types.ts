@@ -1,27 +1,35 @@
 export interface INewsItemProps {
     title: string;
-    description: string;
+    description: string | null;
     url: string;
 }
 
 export interface INewsItemSource {
-    id: string;
-    name: string;
+    totalArticles: 54904;
     articles: Array<INewsItemState>;
 }
 
 export interface INewsItemState {
-    source: INewsItemSource;
-    author: string;
     title: string;
     description: string;
-    url: string;
-    urlToImage: string;
-    publishedAt: string;
     content: string;
+    url: string;
+    image: string;
+    publishedAt: string;
+    source: {
+        name: string,
+        url: string
+    };
 }
 
-export interface IStore {
-    news: INewsItemState;
-    favouriteNews: INewsItemState;
+export interface INewsState {
+    articles: Array<INewsItemState>;
+    loading: boolean;
+    error: string | null;
+    category: string;
+    searchQuery: string;
+}
+
+export interface IFavouritesNewsState {
+    articles: Array<INewsItemState>;
 }

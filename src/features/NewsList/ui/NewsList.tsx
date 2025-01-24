@@ -1,17 +1,14 @@
-// @ts-ignore
-
 import {useEffect} from "react";
 import {INewsItemState} from "../../../types/types.ts";
 import {NewsItem} from "../../NewsItem/ui/NewsItem.tsx";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../store/store.ts";
+import {RootDispatch, RootState} from "../../../store/store.ts";
 import {loadNews} from "../../../store/slices/newsSlice.ts";
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
+
 export const NewsList = () => {
     const {articles, loading, error} = useSelector((state: RootState) => state.news);
-    const dispatch = useDispatch();
+    const dispatch: RootDispatch = useDispatch();
 
     // const [news, setNews] = useState<Array<INewsItemState>>([]);
     // useEffect(() => {
@@ -27,18 +24,16 @@ export const NewsList = () => {
     // }, [])
 
     useEffect(() => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        dispatch(loadNews("Нижний Новгород"))
+        dispatch(loadNews("general"))
     }, [dispatch]);
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
 
     return (
-        articles.articles && articles.articles.map((item: INewsItemState) => {
+        articles.map((item: INewsItemState) => {
                 return (
-                    <NewsItem key={item.title} title={item.title} description={item.description} url={item.url}/>
+                    <NewsItem key={item.title} title={item.title} description={item.content} url={item.url} content={item.content} image={item.image} source={item.source} publishedAt={item.publishedAt} />
                 )
             })
     )
