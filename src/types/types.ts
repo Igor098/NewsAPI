@@ -24,6 +24,7 @@ export interface INewsItemState {
 
 export interface INewsState {
     articles: Array<INewsItemState>;
+    searchResults: Array<INewsItemState>;
     loading: boolean;
     error: string | null;
     category: string;

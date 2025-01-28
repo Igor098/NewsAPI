@@ -4,11 +4,14 @@ import {NewsItem} from "../../NewsItem/ui/NewsItem.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import {RootDispatch, RootState} from "../../../store/store.ts";
 import {loadNews} from "../../../store/slices/newsSlice.ts";
+import style from "./style.module.scss";
 
 
 export const NewsList = () => {
-    const {articles, loading, error} = useSelector((state: RootState) => state.news);
+    const {articles, searchResults, loading, error} = useSelector((state: RootState) => state.news);
     const dispatch: RootDispatch = useDispatch();
+
+    const displayedArticles = searchResults.length > 0 ? searchResults : articles;
 
     // const [news, setNews] = useState<Array<INewsItemState>>([]);
     // useEffect(() => {
@@ -26,15 +29,22 @@ export const NewsList = () => {
     useEffect(() => {
         dispatch(loadNews("general"))
     }, [dispatch]);
-
-    if (loading) return <p>Loading...</p>;
+    // useEffect(() => {
+    //     console.log(articles)
+    // }, [articles])
+    if (loading) return <div className={style.loader}></div>;
     if (error) return <p>Error: {error}</p>;
 
     return (
-        articles.map((item: INewsItemState) => {
+        <div className={style.container}>
+            { displayedArticles.map((item: INewsItemState) => {
                 return (
-                    <NewsItem key={item.title} title={item.title} description={item.content} url={item.url} content={item.content} image={item.image} source={item.source} publishedAt={item.publishedAt} />
+                    <NewsItem key={item.url} title={item.title} description={item.content} url={item.url}
+                              content={item.content} image={item.image} source={item.source}
+                              publishedAt={item.publishedAt}/>
                 )
             })
+        }
+        </div>
     )
 }

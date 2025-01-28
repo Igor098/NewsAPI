@@ -1,0 +1,54 @@
+.newsCard {
+  position: relative;
+  max-width: 22rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.image {
+  max-height: 13.75rem;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+}
+
+.title {
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  color: #1a1a1a;
+}
+
+.sourceLink {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.description {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.75rem;
+  color: #1a1a1a;
+}
+
+.addFavourite {
+  position: sticky;
+  z-index: 10;
+}

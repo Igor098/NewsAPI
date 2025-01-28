@@ -5,6 +5,7 @@ import {INewsItemSource} from "../types/types.ts";
 // const BASE_URL = "https://newsapi.org/v2/everything";
 const API_KEY = "8cd470fc90df75c1226666a611f26e92";
 const BASE_URL = "https://gnews.io/api/v4/top-headlines";
+const SEARCH_URL = "https://gnews.io/api/v4/search";
 
 export const fetchNews = async (category: string) => {
     const response = await axios.get<INewsItemSource>(BASE_URL, {
@@ -19,8 +20,8 @@ export const fetchNews = async (category: string) => {
     return response.data;
 }
 
-export const searchNews = async (query: string) => {
-    const response = await axios.get<INewsItemSource>(BASE_URL, {
+export const fetchNewsByQuery = async (query: string) => {
+    const response = await axios.get<INewsItemSource>(SEARCH_URL, {
         params: {
             apikey: API_KEY,
             country: "ru",
@@ -28,6 +29,6 @@ export const searchNews = async (query: string) => {
             q: query,
         }
     });
-
+    console.log(response.data)
     return response.data;
 }

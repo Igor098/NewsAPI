@@ -1,5 +1,6 @@
 import style from './style.module.scss';
 import { Link } from 'react-router-dom';
+import {SearchForm} from "../../SearchForm";
 
 export const Header = () => {
     return (
@@ -17,8 +18,7 @@ export const Header = () => {
                             </li>
                         </ul>
                     </nav>
-                    <input type="text"/>
-                    <button className="searchBtn">Поиск</button>
+                    <SearchForm />
                     <button className="categories">Категории</button>
                 </div>
             </div>
