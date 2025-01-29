@@ -16,9 +16,13 @@ export const Header = () => {
                             <li>
                                 <Link to='/favourites'>Избранное</Link>
                             </li>
+
+                            <li>
+                                <Link to='/register'>Регистрация</Link>
+                            </li>
                         </ul>
                     </nav>
-                    <SearchForm />
+                    <SearchForm/>
                     <button className="categories">Категории</button>
                 </div>
             </div>
