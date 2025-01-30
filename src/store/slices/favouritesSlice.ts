@@ -9,7 +9,7 @@ const initialState: IFavouritesNewsState = {
 
 export const favouritesNewsSlice = createSlice({
     name: "favourites",
-    initialState: initialState,
+    initialState,
 
     reducers: {
         addNews: (state: IFavouritesNewsState, action: PayloadAction<INewsItemState>) => {

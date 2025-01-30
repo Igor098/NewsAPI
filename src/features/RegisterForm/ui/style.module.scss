@@ -18,6 +18,10 @@
 
 .formField {
   display: grid;
+}
+
+.formLabel {
+  display: grid;
   text-align: start;
   font-family: "Roboto", sans-serif;
   font-size: 1.5rem;
@@ -35,4 +39,19 @@
   font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 2rem;
+}
+
+.instructions {
+  font-size: 0.75rem;
+  border-radius: 0.5rem;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 0.25rem;
+  position: relative;
+  bottom: -10px;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
 }

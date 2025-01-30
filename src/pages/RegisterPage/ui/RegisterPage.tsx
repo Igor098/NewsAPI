@@ -5,7 +5,7 @@ export const RegisterPage = () => {
     return (
         <section>
             <div className={style.container}>
-                <RegisterForm/>
+                <RegisterForm />
             </div>
 
         </section>
