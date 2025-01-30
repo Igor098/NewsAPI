@@ -50,96 +50,105 @@ export const RegisterForm = () => {
     return (
         <form className={style.registerForm} onSubmit={onClick}>
             <h1 className={style.title}>Регистрация</h1>
-            <div className={style.formField}>
-                <label className={style.formLabel}>
+            <fieldset className={style.formField}>
+                <label className={
+                    `${style.formLabel}
+                     ${name && style.active}`
+                    }
+                >
                     Имя пользователя
-                    <input
-                        ref={userRef}
-                        className={style.formInput}
-                        type={"text"}
-                        name={"username"}
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        onFocus={() => setNameFocus(true)}
-                        onBlur={() => setNameFocus(false)}
-                        required
-                        aria-invalid={validName}
-                        aria-describedby="nameHelp"
-                    />
                 </label>
+                <input
+                    ref={userRef}
+                    className={
+                        `${style.formInput} 
+                         ${name && !nameFocus && !validName ? style.notValid : ""}`
+                    }
+                    type={"text"}
+                    name={"username"}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    onFocus={() => setNameFocus(true)}
+                    onBlur={() => setNameFocus(false)}
+                    required
+                    aria-invalid={validName}
+                    aria-describedby="nameHelp"
+                />
                 <p
                     id="nameHelp"
                     className={
                         name && !nameFocus && name && !validName ? style.instructions : style.offscreen
                     }
                 >
-                    4 to 24 characters.
-                    <br/>
-                    Must begin with a letter.
-                    <br/>
-                    Letters, numbers, underscores, hyphens allowed.
+                    От 4 до 24 символов. Должен начинаться с буквы.
                 </p>
-            </div>
+            </fieldset>
 
-            <div className={style.formField}>
-                <label className={style.formLabel}>
+            <fieldset className={style.formField}>
+                <label className={
+                    `${style.formLabel}
+                     ${email && style.active}`
+                }
+                >
                     Введите Email
-                    <input
-                        className={style.formInput}
-                        type={"email"}
-                        name={"email"}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        onFocus={() => setEmailFocus(true)}
-                        onBlur={() => setEmailFocus(false)}
-                        required
-                        aria-invalid={validEmail}
-                        aria-describedby="helpEmail"
-                    />
                 </label>
+                <input
+                    className={
+                        `${style.formInput} 
+                            ${email && !emailFocus && !validEmail ? style.notValid : ""}`
+                    }
+                    type={"email"}
+                    name={"email"}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onFocus={() => setEmailFocus(true)}
+                    onBlur={() => setEmailFocus(false)}
+                    required
+                    aria-invalid={validEmail}
+                    aria-describedby="helpEmail"
+                />
                 <p
                     id="helpEmail"
                     className={
                         email && !emailFocus && !validEmail ? style.instructions : style.offscreen
                     }
                 >
-                    8+ characters.
-                    <br/>
-                    Must begin with a letter.
-                    <br/>
-                    Need special character:{' '}
+                    Не менее 8 символов. Должен начинаться с буквы и содержать спец. символ:{' '}
                     <span aria-label="at">@</span>{' '}
                 </p>
-            </div>
+            </fieldset>
 
-            <div className={style.formField}>
-                <label className={style.formLabel}>
+            <fieldset className={style.formField}>
+                <label className={
+                    `${style.formLabel}
+                     ${password && style.active}`
+                }
+                >
                     Введите пароль
-                    <input
-                        className={style.formInput}
-                        type={"password"}
-                        name={"password"}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        onFocus={() => setPasswordFocus(true)}
-                        onBlur={() => setPasswordFocus(false)}
-                        required
-                        aria-invalid={validPassword}
-                        aria-describedby="helpPassword"
-                    />
                 </label>
+                <input
+                    className={
+                        `${style.formInput} 
+                            ${password && !passwordFocus && !validPassword ? style.notValid : ""}`
+                    }
+                    type={"password"}
+                    name={"password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onFocus={() => setPasswordFocus(true)}
+                    onBlur={() => setPasswordFocus(false)}
+                    required
+                    aria-invalid={validPassword}
+                    aria-describedby="helpPassword"
+                />
                 <p
                     id="helpPassword"
                     className={
                         password && !passwordFocus && !validPassword ? style.instructions : style.offscreen
                     }
                 >
-                    8 to 24 characters.
-                    <br/>
-                    Must include uppercase and lowercase letters, a number and a
-                    special character.
-                    <br/>
-                    Allowed special characters:{' '}
+                    От 8 до 24 символов. Должен содержать заглавную и прописную буквы, цифры и спец. символ.
+                    Поддерживаемые спец. символы:{' '}
                     <span aria-label="exclamation mark">!</span>{' '}
                     <span aria-label="at symbol">@</span>{' '}
                     <span aria-label="hashtag">#</span>{' '}
@@ -147,35 +156,42 @@ export const RegisterForm = () => {
                     <span aria-label="percent">%</span>
                     <span aria-label="underline">_</span>
                 </p>
-            </div>
+            </fieldset>
 
-            <div className={style.formField}>
-                <label className={style.formLabel}>
+            <fieldset className={style.formField}>
+                <label className={
+                    `${style.formLabel}
+                     ${confirm && style.active}`
+                }
+                >
                     Подтвердите пароль
-                    <input
-                        className={style.formInput}
-                        type={"password"}
-                        name={"confirmPassword"}
-                        value={confirm}
-                        onChange={(e) => setConfirm(e.target.value)}
-                        onFocus={() => setConfirmFocus(true)}
-                        onBlur={() => setConfirmFocus(false)}
-                        required
-                        aria-invalid={validConfirm}
-                        aria-describedby="helpConfirm"
-                    />
                 </label>
+                <input
+                    className={
+                        `${style.formInput} 
+                            ${confirm && !confirmFocus && !validConfirm ? style.notValid : ""}`
+                    }
+                    type={"password"}
+                    name={"confirmPassword"}
+                    value={confirm}
+                    onChange={(e) => setConfirm(e.target.value)}
+                    onFocus={() => setConfirmFocus(true)}
+                    onBlur={() => setConfirmFocus(false)}
+                    required
+                    aria-invalid={validConfirm}
+                    aria-describedby="helpConfirm"
+                />
                 <p
                     id="helpConfirm"
                     className={
                         confirm && !confirmFocus && !validConfirm ? style.instructions : style.offscreen
                     }
                 >
-                    Must match the first password input field.
+                    Должно совпадать с первым полем ввода пароля.
                 </p>
-            </div>
+            </fieldset>
 
-            <button className={style.buttonSubmit} type={"submit"}>Зарегистрироваться</button>
+            <button className={`${style.buttonSubmit} btnReset`} type={"submit"}>Зарегистрироваться</button>
 
         </form>
     )
