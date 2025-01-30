@@ -1,11 +1,37 @@
 import style from "./style.module.scss";
-import {FormEvent, useEffect, useRef, useState} from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { RootDispatch } from "../../../store/store.ts";
+import {registerRequest} from "../../../store/slices/authSlice.ts";
+import {IRegisterModel} from "../../../types/types.ts";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const EMAIL_REGEX = /^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$/
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%_]).{8,24}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%_-]).{8,24}$/;
 
 export const RegisterForm = () => {
+
+    // const { error, loading } = useSelector((state: RootState) => state.auth);
+    const dispatch: RootDispatch = useDispatch();
+
+    const handleRegister = (e: FormEvent) => {
+        e.preventDefault()
+
+        const testUsername = USER_REGEX.test(name);
+        const testEmail = EMAIL_REGEX.test(email);
+        const testPassword = PWD_REGEX.test(password);
+        const testConfirm = password === confirm;
+
+        if (testUsername && testEmail && testPassword && testConfirm) {
+            const body: IRegisterModel = {
+                username: name,
+                email: email,
+                password: password,
+                confirm_password: confirm,
+            }
+            dispatch(registerRequest(body))
+        }
+    }
 
     const userRef = useRef<HTMLInputElement>(null);
 
@@ -25,11 +51,6 @@ export const RegisterForm = () => {
     const [validConfirm, setValidConfirm] = useState(false);
     const [confirmFocus, setConfirmFocus] = useState(false);
 
-    const onClick = (e: FormEvent) => {
-        e.preventDefault();
-        console.log(`${name}, ${email}, ${password}, ${confirm}`);
-    }
-
     useEffect(() => {
         userRef.current?.focus();
     }, []);
@@ -48,7 +69,7 @@ export const RegisterForm = () => {
     }, [confirm, password]);
 
     return (
-        <form className={style.registerForm} onSubmit={onClick}>
+        <form className={style.registerForm} onSubmit={handleRegister}>
             <h1 className={style.title}>Регистрация</h1>
             <fieldset className={style.formField}>
                 <label className={
@@ -155,6 +176,7 @@ export const RegisterForm = () => {
                     <span aria-label="dollar sign">$</span>{' '}
                     <span aria-label="percent">%</span>
                     <span aria-label="underline">_</span>
+                    <span aria-label="line">-</span>
                 </p>
             </fieldset>
 

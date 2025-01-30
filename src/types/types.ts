@@ -34,3 +34,18 @@ export interface INewsState {
 export interface IFavouritesNewsState {
     articles: Array<INewsItemState>;
 }
+
+export interface IRegisterModel {
+    email: string;
+    password: string;
+    username: string;
+    confirm_password: string;
+}
+
+export interface IAuthState {
+    accessToken: string | null;
+    isAuthenticated: boolean;
+    username: string | null;
+    loading: boolean;
+    error: string | null,
+}
