@@ -1,11 +1,12 @@
-import {IAuthState, IRegisterModel} from "../../types/types.ts";
+import {IAuthState, ILoginModel, IRegisterModel, IUserModel} from "../../types/types.ts";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchRegister } from "../../api/registerAPI.ts";
+import {fetchLogin, fetchRegister, fetchUserInfo} from "../../api/authAPI.ts";
 
 const initialState: IAuthState = {
-    accessToken: null,
     isAuthenticated: false,
     username: null,
+    email: null,
+    role_name: null,
     loading: false,
     error: null,
 }
@@ -17,10 +18,33 @@ export const registerRequest = createAsyncThunk(
     }
 )
 
+export const loginRequest = createAsyncThunk(
+    'auth/login',
+    async (loginModel: ILoginModel) => {
+        return await fetchLogin(loginModel)
+    }
+)
+
+export const userInfoRequest = createAsyncThunk(
+    'auth/user',
+    async () => {
+        return await fetchUserInfo();
+    }
+)
+
 export const authSlice = createSlice({
     name: "auth",
     initialState,
-    reducers: {},
+    reducers: {
+        logout(state) {
+            state.isAuthenticated = false;
+            state.username = null;
+            state.email = null;
+            state.role_name = null;
+            state.loading = false;
+            state.error = null;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(registerRequest.pending, (state) => {
@@ -28,14 +52,46 @@ export const authSlice = createSlice({
                 state.error = null;
             })
 
-            .addCase(registerRequest.fulfilled, (state, action: PayloadAction<number>) => {
+            .addCase(registerRequest.fulfilled, (state) => {
                 state.loading = false;
-                console.log("Ответ от сервера:", action.payload)
             })
 
             .addCase(registerRequest.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message || 'Something went wrong';
+            })
+
+            .addCase(loginRequest.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+
+            .addCase(loginRequest.fulfilled, (state) => {
+                state.loading = false;
+                state.isAuthenticated = true;
+            })
+
+            .addCase(loginRequest.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.code || 'Something went wrong';
+            })
+
+            .addCase(userInfoRequest.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+
+            .addCase(userInfoRequest.fulfilled, (state, action: PayloadAction<IUserModel>) => {
+                state.loading = false;
+                state.isAuthenticated = true;
+                state.username = action.payload.username;
+                state.email = action.payload.email;
+                state.role_name = action.payload.role_name;
+            })
+
+            .addCase(userInfoRequest.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.code || 'Something went wrong';
             })
     }
 })

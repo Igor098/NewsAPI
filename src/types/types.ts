@@ -42,10 +42,22 @@ export interface IRegisterModel {
     confirm_password: string;
 }
 
+export interface ILoginModel {
+    email: string;
+    password: string;
+}
+
 export interface IAuthState {
-    accessToken: string | null;
     isAuthenticated: boolean;
     username: string | null;
+    email: string | null;
+    role_name: string | null;
     loading: boolean;
     error: string | null,
+}
+
+export interface IUserModel {
+    email: string;
+    username: string;
+    role_name: string;
 }

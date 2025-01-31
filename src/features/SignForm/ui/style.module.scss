@@ -62,3 +62,16 @@
   font-size: 1.5rem;
   font-weight: 500;
 }
+
+.errmsg {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: #d30d2e;
+  font-weight: bold;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}

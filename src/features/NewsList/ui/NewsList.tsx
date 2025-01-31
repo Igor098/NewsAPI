@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootDispatch, RootState} from "../../../store/store.ts";
 import {loadNews} from "../../../store/slices/newsSlice.ts";
 import style from "./style.module.scss";
+import {userInfoRequest} from "../../../store/slices/authSlice.ts";
 
 
 export const NewsList = () => {
@@ -29,9 +30,11 @@ export const NewsList = () => {
     useEffect(() => {
         dispatch(loadNews("general"))
     }, [dispatch]);
-    // useEffect(() => {
-    //     console.log(articles)
-    // }, [articles])
+
+    useEffect(() => {
+            dispatch(userInfoRequest())
+    }, [dispatch])
+
     if (loading) return <div className={style.loader}></div>;
     if (error) return <p>Error: {error}</p>;
 
