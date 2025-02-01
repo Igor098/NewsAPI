@@ -5,11 +5,25 @@ export interface INewsItemProps {
 }
 
 export interface INewsItemSource {
-    totalArticles: 54904;
-    articles: Array<INewsItemState>;
+    totalArticles: number;
+    articles: Array<INewsItemApiState>;
+}
+
+export interface INewsItemApiState {
+    title: string;
+    description: string;
+    content: string;
+    url: string;
+    image: string;
+    publishedAt: string;
+    source: {
+        name: string,
+        url: string
+    };
 }
 
 export interface INewsItemState {
+    id: string;
     title: string;
     description: string;
     content: string;
@@ -23,16 +37,18 @@ export interface INewsItemState {
 }
 
 export interface INewsState {
-    articles: Array<INewsItemState>;
+    newsArticles: Array<INewsItemState>;
     searchResults: Array<INewsItemState>;
     loading: boolean;
-    error: string | null;
+    newsError: string | null;
     category: string;
     searchQuery: string;
 }
 
 export interface IFavouritesNewsState {
     articles: Array<INewsItemState>;
+    loading: boolean;
+    error: string | null;
 }
 
 export interface IRegisterModel {
@@ -60,4 +76,8 @@ export interface IUserModel {
     email: string;
     username: string;
     role_name: string;
+}
+
+export interface IDeletedNews {
+    id: string;
 }

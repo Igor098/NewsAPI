@@ -1,19 +1,32 @@
 import {INewsItemState} from "../../../types/types.ts";
 import {NewsItem} from "../../NewsItem/ui/NewsItem.tsx";
-import {useSelector} from "react-redux";
-import {RootState} from "../../../store/store.ts";
+import {useDispatch, useSelector} from "react-redux";
+import {RootDispatch, RootState} from "../../../store/store.ts";
+import {useEffect} from "react";
+import {loadSavedNews} from "../../../store/slices/favouritesSlice.ts";
+import style from "./style.module.scss";
 
 
 export const FavouritesList = () => {
-    const {articles} = useSelector((state: RootState) => state.favourites);
+    const {articles, loading, error} = useSelector((state: RootState) => state.favourites);
+    const dispatch: RootDispatch = useDispatch();
 
-    if (articles.length === 0) return <p>Not Items</p>;
+    useEffect(() => {
+        dispatch(loadSavedNews())
+    }, [dispatch]);
+
+    if (loading) return <div className={style.loader}></div>;
+    if (error) return <p>Error: {error}</p>;
 
     return (
-        articles.map((item: INewsItemState) => {
-                return (
-                    <NewsItem key={item.title} title={item.title} description={item.content} url={item.url} content={item.content} image={item.image} source={item.source} publishedAt={item.publishedAt} />
-                )
-            })
+        <>
+            {
+                articles.map((item: INewsItemState) => {
+                        return (
+                            <NewsItem key={item.title} id={item.id} title={item.title} description={item.content} url={item.url} content={item.content} image={item.image} source={item.source} publishedAt={item.publishedAt} />
+                        )
+                    })
+            }
+        </>
     )
 }

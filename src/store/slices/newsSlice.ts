@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {fetchNews, fetchNewsByQuery} from "../../api/newsAPI.ts";
-import { INewsItemSource, INewsState } from "../../types/types.ts";
+import {INewsItemSource, INewsItemApiState, INewsState, INewsItemState} from "../../types/types.ts";
+import {generateUniqueId} from "../../utils/utils.ts";
 
 
 const initialState: INewsState = {
-    articles: [],
+    newsArticles: [],
     searchResults: [],
     loading: false,
-    error: null,
+    newsError: null,
     category: 'general',
     searchQuery: '',
 }
@@ -39,6 +40,14 @@ export const newsSlice = createSlice({
 
         setSearchQuery: (state, action: PayloadAction<string>) => {
             state.searchQuery = action.payload;
+        },
+
+        setArticles: (state, action: PayloadAction<Array<INewsItemState>>) => {
+            state.newsArticles = action.payload;
+        },
+
+        setSearchResults: (state, action: PayloadAction<Array<INewsItemState>>) => {
+            state.searchResults = action.payload;
         }
     },
 
@@ -46,35 +55,41 @@ export const newsSlice = createSlice({
         builder
             .addCase(loadNews.pending, (state) => {
                 state.loading = true;
-                state.error = null;
+                state.newsError = null;
             })
 
             .addCase(loadNews.fulfilled, (state, action: PayloadAction<INewsItemSource>) => {
                 state.loading = false;
-                state.articles = action.payload.articles;
+                const articles: Array<INewsItemApiState> = action.payload.articles;
+                state.newsArticles = articles.map((article: INewsItemApiState) => {
+                    return {id: generateUniqueId(), ...article}
+                })
             })
 
             .addCase(loadNews.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message || 'Something went wrong';
+                state.newsError = action.error.message || 'Something went wrong';
             })
 
             .addCase(searchNews.pending, (state) => {
                 state.loading = true;
-                state.error = null;
+                state.newsError = null;
             })
 
             .addCase(searchNews.fulfilled, (state, action: PayloadAction<INewsItemSource>) => {
                 state.loading = false;
-                state.searchResults = action.payload.articles;
+                const articles: Array<INewsItemApiState> = action.payload.articles;
+                state.searchResults = articles.map((article: INewsItemApiState) => {
+                    return {id: generateUniqueId(), ...article}
+                })
             })
 
             .addCase(searchNews.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message || 'Something went wrong';
+                state.newsError = action.error.message || 'Something went wrong';
             })
     }
 })
 
-export const {setCategory, setSearchQuery} = newsSlice.actions;
+export const {setCategory, setSearchQuery, setArticles, setSearchResults} = newsSlice.actions;
 export default newsSlice.reducer;

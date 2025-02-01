@@ -1,6 +1,5 @@
 .newsCard {
   position: relative;
-  max-width: 22rem;
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
@@ -11,6 +10,11 @@
   &:hover {
       box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
   }
+}
+
+.newsWrapper {
+  padding-inline: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .image {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ILoginModel, IRegisterModel, IUserModel} from "../types/types.ts";
+import {IDeletedNews, ILoginModel, INewsItemState, IRegisterModel, IUserModel} from "../types/types.ts";
 
 
 const REGISTER_URL = "/auth/register/";
@@ -7,6 +7,9 @@ const LOGIN_URL = "/auth/login/";
 const USER_URL = "/auth/me/";
 const REFRESH_URL = "/auth/refresh/";
 const LOGOUT_URL = "/auth/logout/";
+const GET_NEWS_URL = "/news/";
+const ADD_NEWS_URL = "/news/add/";
+const DELETE_NEWS_URL = "/news/delete/";
 
 export const api = axios.create({
     baseURL: 'http://localhost:8000',
@@ -60,5 +63,24 @@ export const fetchUserInfo = async () => {
 
 export const fetchLogout = async () => {
     const response = await api.post(LOGOUT_URL);
+    return response.data;
+}
+
+export const fetchSavedNews = async (): Promise<Array<INewsItemState>> => {
+    const response = await api.get<Array<INewsItemState>>(GET_NEWS_URL);
+    return response.data;
+}
+
+export const fetchAddNews = async (article: INewsItemState): Promise<INewsItemState> => {
+    const response = await api.post(ADD_NEWS_URL, JSON.stringify(article));
+    return response.data;
+}
+
+export const fetchDeleteNews = async (articleId: string): Promise<IDeletedNews> => {
+    const response = await api.delete(DELETE_NEWS_URL, {
+        params: {
+            article_id: articleId,
+        }
+    });
     return response.data;
 }

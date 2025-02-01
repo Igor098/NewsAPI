@@ -13,6 +13,13 @@
   cursor: pointer;
 }
 
+.newsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+  justify-content: center;
+  gap: 1rem;
+}
+
 body {
   background-color: #FBFBFB;
 }

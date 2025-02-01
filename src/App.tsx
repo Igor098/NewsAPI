@@ -7,8 +7,7 @@ import {store} from "./store/store.ts";
 import {RegisterPage} from "./pages/RegisterPage/";
 import {SignPage} from "./pages/SignPage";
 
-function App() {
-  // const [count, setCount] = useState(0)
+function App(){
 
   return (
       <ReduxProvider store={store}>
