@@ -1,4 +1,6 @@
 @use "normalize";
+@use "colors" as colors;
+@forward "colors";
 
 .listReset {
   margin: 0;
@@ -15,11 +17,13 @@
 
 .newsContainer {
   display: grid;
+  max-width: 1200px;
+  margin: 0 auto;
   grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
   justify-content: center;
   gap: 1rem;
 }
 
 body {
-  background-color: #FBFBFB;
+  background-color: colors.$color-mostly-white;
 }

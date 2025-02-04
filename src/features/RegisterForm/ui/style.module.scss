@@ -1,12 +1,12 @@
-@use '../../../styles/global';
+@use '../../../styles/global' as style;
 
 .registerForm {
   max-width: 24rem;
   display: grid;
   grid-row-gap: 2rem;
-  background-color: #FBFBFB;
+  background-color: style.$color-mostly-white;
   border-radius: 1.5rem;
-  color: #1a1a1a;
+  color: style.$color-black;
   padding: 1rem 5rem;
   filter: drop-shadow(0 17px 46px rgba(92, 99, 107, 0.08));
 }
@@ -38,13 +38,13 @@
 
 .formInput {
   min-height: 2.5rem;
-  border: 2px solid #DDDDDD;
+  border: 2px solid style.$color-light-gray;
   border-radius: 0.5rem;
   background-color: transparent;
   outline-width: 0;
 
   &:focus {
-    border: 2px solid #646cff;
+    border: 2px solid style.$color-blue;
   }
 }
 
@@ -58,8 +58,8 @@
   margin-bottom: 2rem;
   padding-block: 1rem;
   border-radius: 0.75rem;
-  background-color: #646cff;
-  color: white;
+  background-color: style.$color-blue;
+  color: style.$color-white;
   font-family: "Roboto", sans-serif;
   font-size: 1.5rem;
   font-weight: 500;
@@ -68,7 +68,7 @@
 .instructions {
   font-size: 0.75rem;
   border-radius: 0.5rem;
-  color: #d30d2e;
+  color: style.$color-red;
   position: relative;
   margin: 0;
   padding-top: 0.25rem;
@@ -81,5 +81,5 @@
 }
 
 .notValid {
-  border: 2px solid #d30d2e;
+  border: 2px solid style.$color-red;
 }

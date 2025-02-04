@@ -1,4 +1,4 @@
-@use '../../../styles/global';
+@use '../../../styles/global' as style;
 
 
 .container {
@@ -12,6 +12,8 @@
   align-items: center;
   justify-content: flex-end;
   gap: 2rem;
+  background-color: style.$color-blue;
+  padding: 2rem;
 }
 
 .navigationList {

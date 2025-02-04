@@ -1,0 +1,75 @@
+@use "./global" as style;
+
+.loader  {
+  animation: rotate 1s infinite;
+  height: 100px;
+  width: 100px;
+
+  &::before, &::after {
+    border-radius: 50%;
+    content: '';
+    display: block;
+    height: 40px;
+    width: 40px;
+  }
+
+  &::before {
+    animation: ball1 1s infinite;
+    background-color: style.$color-red;
+    box-shadow: 60px 0 0 style.$color-yellow;
+    margin-bottom: 10px;
+  }
+
+  &::after {
+    animation: ball2 1s infinite;
+    background-color: style.$color-light-blue;
+    box-shadow: 60px 0 0 style.$color-green;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg) scale(0.8);
+    -moz-transform: rotate(0deg) scale(0.8);
+  }
+  50% {
+    -webkit-transform: rotate(360deg) scale(1.2);
+    -moz-transform: rotate(360deg) scale(1.2);
+  }
+  100% {
+    -webkit-transform: rotate(720deg) scale(0.8);
+    -moz-transform: rotate(720deg) scale(0.8);
+  }
+}
+
+@keyframes ball1 {
+  0% {
+    box-shadow: 60px 0 0 style.$color-yellow;
+  }
+  50% {
+    box-shadow: 0 0 0 style.$color-yellow;
+    margin-bottom: 0;
+    -webkit-transform: translate(15px,15px);
+    -moz-transform: translate(15px, 15px);
+  }
+  100% {
+    box-shadow: 60px 0 0 style.$color-yellow;
+    margin-bottom: 10px;
+  }
+}
+
+@keyframes ball2 {
+  0% {
+    box-shadow: 60px 0 0 style.$color-green;
+  }
+  50% {
+    box-shadow: 0 0 0 style.$color-green;
+    margin-top: -20px;
+    -webkit-transform: translate(15px,15px);
+    -moz-transform: translate(15px, 15px);
+  }
+  100% {
+    box-shadow: 60px 0 0 style.$color-green;
+    margin-top: 0;
+  }
+}

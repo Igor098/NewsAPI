@@ -15,15 +15,8 @@ export const SignForm = () => {
     const errRef = useRef(null);
     const navigate = useNavigate();
 
-    const { error, isAuthenticated } = useSelector((state: RootState) => state.auth);
+    const { isAuthenticated } = useSelector((state: RootState) => state.auth);
     const dispatch: RootDispatch = useDispatch();
-
-    useEffect(() => {
-
-        if (error === "ERR_BAD_REQUEST") {
-            setErrMsg("Неверный логин или пароль");
-        }
-    }, [error]);
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -31,15 +24,19 @@ export const SignForm = () => {
         }
     }, [isAuthenticated, navigate]);
 
-    const handleLogin = (e: FormEvent) => {
+    const handleLogin = async (e: FormEvent) => {
         e.preventDefault();
-
-        const body: ILoginModel = {
-            email: email,
-            password: password,
+        try {
+            const body: ILoginModel = {
+                email: email,
+                password: password,
+            }
+            await dispatch(loginRequest(body)).unwrap();
         }
-        dispatch(loginRequest(body));
-
+        catch (e) {
+            setErrMsg("Неверный логин или пароль")
+            console.error(e)
+        }
     }
 
     return (
