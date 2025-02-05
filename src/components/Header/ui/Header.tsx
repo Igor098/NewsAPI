@@ -1,6 +1,7 @@
 import style from './style.module.scss';
 import { Link } from 'react-router-dom';
 import {SearchForm} from "../../SearchForm";
+import {Dropdown} from "../../Dropdown";
 
 export const Header = () => {
     return (
@@ -23,7 +24,7 @@ export const Header = () => {
                         </ul>
                     </nav>
                     <SearchForm/>
-                    <button className="categories">Категории</button>
+                    <Dropdown />
                 </div>
             </div>
         </header>

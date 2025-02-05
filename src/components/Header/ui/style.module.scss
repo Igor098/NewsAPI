@@ -12,7 +12,7 @@
   align-items: center;
   justify-content: flex-end;
   gap: 2rem;
-  background-color: style.$color-blue;
+  //background-color: style.$color-blue;
   padding: 2rem;
 }
 
@@ -22,3 +22,94 @@
   justify-content: flex-end;
   gap: 1rem;
 }
+
+.dropdown {
+  position: relative;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  max-width: 12rem;
+}
+
+.dropdownToggle {
+  min-width: 12rem;
+  padding: 0.25rem 1rem;
+  background-color: style.$color-blue; /* Цвет фона кнопки */
+  color: style.$color-black;
+  border: 1px solid style.$color-mostly-white;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #7d85f5;
+    border: 1px solid #7d85f5;
+    color: style.$color-black;
+
+    button {
+      color: style.$color-white;
+    }
+  }
+}
+
+.dropdownMenu {
+  position: absolute;
+  width: max-content;
+  display: grid;
+  justify-items: center;
+  opacity: 0;
+  background-color: style.$color-mostly-white;
+  border: 1px solid style.$color-light-gray;
+  border-radius: 5px;
+  z-index: 10;
+  min-width: 10rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: scale(0.95);
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.dropdownMenu.open {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+/* Стиль для элементов в выпадающем меню */
+.dropdownItem {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: style.$color-black;
+  border-bottom: 1px solid style.$color-light-gray;
+  font-size: 0.9em;
+  z-index: 100;
+}
+
+/* Убираем границу для последнего элемента */
+.dropdownItem:last-child {
+  border-bottom: none;
+}
+
+/* Изменение фона при наведении на элемент меню */
+.dropdownItem:hover {
+  background-color: style.$color-blue;
+  color: style.$color-white;
+}
+
+.dropdownItem:first-child:hover {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.dropdownItem:last-child:hover {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+//.dropdown:hover .dropdownMenu {
+//  display: grid;
+//  opacity: 1;
+//  justify-items: center;
+//  animation: dropdownMenu 0.5s;
+//}
