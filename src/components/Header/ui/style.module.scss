@@ -1,10 +1,15 @@
 @use '../../../styles/global' as style;
 
 
+.header {
+  margin: 2rem 0;
+}
+
 .container {
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  background-color: style.$color-smoke-white;
+  border-radius: 1rem;
 }
 
 .headerWrapper {
@@ -13,7 +18,7 @@
   justify-content: flex-end;
   gap: 2rem;
   //background-color: style.$color-blue;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .navigationList {
@@ -21,6 +26,15 @@
   align-items: center;
   justify-content: flex-end;
   gap: 1rem;
+}
+
+.navigationItem {
+  a {
+    color: style.$color-dark-gray;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+  }
 }
 
 .dropdown {
@@ -32,9 +46,9 @@
 
 .dropdownToggle {
   min-width: 12rem;
-  padding: 0.25rem 1rem;
-  background-color: style.$color-blue; /* Цвет фона кнопки */
-  color: style.$color-black;
+  padding: 0.5rem 1rem;
+  background-color: style.$color-dark-gray; /* Цвет фона кнопки */
+  color: style.$color-white;
   border: 1px solid style.$color-mostly-white;
   cursor: pointer;
   border-radius: 5px;
@@ -42,9 +56,8 @@
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 
   &:hover {
-    background-color: #7d85f5;
-    border: 1px solid #7d85f5;
-    color: style.$color-black;
+    background-color: style.$color-hover;
+    color: style.$color-white;
 
     button {
       color: style.$color-white;
@@ -54,7 +67,7 @@
 
 .dropdownMenu {
   position: absolute;
-  width: max-content;
+  min-width: 12rem;
   display: grid;
   justify-items: center;
   opacity: 0;
@@ -62,7 +75,6 @@
   border: 1px solid style.$color-light-gray;
   border-radius: 5px;
   z-index: 10;
-  min-width: 10rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transform: scale(0.95);
   pointer-events: none;
@@ -84,6 +96,7 @@
   border-bottom: 1px solid style.$color-light-gray;
   font-size: 0.9em;
   z-index: 100;
+  transition: background-color .3s ease-in-out, color .3s ease-in-out;
 }
 
 /* Убираем границу для последнего элемента */
@@ -93,7 +106,7 @@
 
 /* Изменение фона при наведении на элемент меню */
 .dropdownItem:hover {
-  background-color: style.$color-blue;
+  background-color: style.$color-hover;
   color: style.$color-white;
 }
 

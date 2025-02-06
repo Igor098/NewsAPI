@@ -23,7 +23,7 @@ export const NewsItem = (article: INewsItemState) => {
             }
         } else {
             try {
-                await dispatch(deleteNews(article.id));
+                await dispatch(deleteNews(article.id)).unwrap();
             } catch (error) {
                 console.error('Ошибка при удалении новости', error);
             }
@@ -42,7 +42,7 @@ export const NewsItem = (article: INewsItemState) => {
             <div className={style.newsWrapper}>
                 <h3 className={style.title}>{article.title}</h3>
                 {article.description && <p className={style.description}>{article.description}</p>}
-                <button className={style.addFavourite} onClick={saveOrDeleteNews}>{localLoading ? 'Обработка...' : (isSaved ? 'Удалить' : 'Добавить')}</button>
+                <button className={`${style.addFavourite} ${style.btnReset}`} onClick={saveOrDeleteNews}>{localLoading ? 'Обработка...' : (isSaved ? 'Удалить' : 'Добавить')}</button>
             </div>
             <a className={style.sourceLink} href={article.url}></a>
         </div>

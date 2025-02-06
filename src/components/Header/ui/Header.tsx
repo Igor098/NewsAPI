@@ -5,20 +5,20 @@ import {Dropdown} from "../../Dropdown";
 
 export const Header = () => {
     return (
-        <header>
+        <header className={style.header}>
             <div className={style.container}>
                 <div className={style.headerWrapper}>
                     <nav>
                         <ul className={`${style.navigationList} ${style.listReset}`}>
-                            <li>
+                            <li className={style.navigationItem}>
                                 <Link to='/'>Все новости</Link>
                             </li>
 
-                            <li>
+                            <li className={style.navigationItem}>
                                 <Link to='/favourites'>Избранное</Link>
                             </li>
 
-                            <li>
+                            <li className={style.navigationItem}>
                                 <Link to='/register'>Регистрация</Link>
                             </li>
                         </ul>
