@@ -1,0 +1,84 @@
+@use '../../../styles/global' as style;
+
+
+.dropdown {
+  position: relative;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  max-width: 12rem;
+}
+
+.dropdownToggle {
+  min-width: 12rem;
+  padding: 0.5rem 1rem;
+  background-color: style.$color-smoke-white; /* Цвет фона кнопки */
+  color: style.$color-dark-gray;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: style.$color-light-hover;
+  }
+}
+
+.dropdownMenu {
+  position: absolute;
+  min-width: 12rem;
+  display: grid;
+  justify-items: center;
+  opacity: 0;
+  background-color: style.$color-mostly-white;
+  border: 1px solid style.$color-light-gray;
+  border-radius: 5px;
+  z-index: 10;
+  //box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: scale(0.95);
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.dropdownMenu.open {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+/* Стиль для элементов в выпадающем меню */
+.dropdownItem {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: style.$color-black;
+  border-bottom: 1px solid style.$color-light-gray;
+  font-size: 0.9em;
+  z-index: 100;
+  transition: background-color .3s ease-in-out, color .3s ease-in-out;
+}
+
+/* Убираем границу для последнего элемента */
+.dropdownItem:last-child {
+  border-bottom: none;
+}
+
+/* Изменение фона при наведении на элемент меню */
+.dropdownItem:hover {
+  background-color: style.$color-light-hover;
+  color: style.$color-white;
+}
+
+.dropdownItem:first-child:hover {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.dropdownItem:last-child:hover {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.active {
+  background-color: style.$color-light-hover;
+}

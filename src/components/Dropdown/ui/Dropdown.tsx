@@ -1,4 +1,4 @@
-import style from "../../Header/ui/style.module.scss";
+import style from "./style.module.scss";
 import { useState } from "react";
 import {IDropdownProps} from "../../../types/types.ts";
 
