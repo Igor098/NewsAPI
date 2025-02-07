@@ -3,25 +3,27 @@ import {INewsItemState} from "../../../types/types.ts";
 import {NewsItem} from "../../NewsItem/ui/NewsItem.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import {RootDispatch, RootState} from "../../../store/store.ts";
-import {loadNews} from "../../../store/slices/newsSlice.ts";
+import {loadNews} from "../../../store/slices/news/newsSlice.ts";
 import style from "./style.module.scss";
 import {userInfoRequest} from "../../../store/slices/auth/authSlice.ts";
 import {useNavigate} from "react-router-dom";
 import {loadSavedNews} from "../../../store/slices/favouritesSlice.ts";
 import {selectError} from "../../../store/slices/auth/authSelectors.ts";
+import {selectCategory} from "../../../store/slices/news/newsSelector.ts";
 
 
 export const NewsList = () => {
     const {newsArticles, searchResults, loading, newsError} = useSelector((state: RootState) => state.news);
     const {articles} = useSelector((state: RootState) => state.favourites)
     const error = useSelector(selectError);
+    const category = useSelector(selectCategory)
     const dispatch: RootDispatch = useDispatch();
     const navigate = useNavigate();
 
     const displayedArticles = searchResults.length > 0 ? searchResults : newsArticles;
 
     useEffect(() => {
-        dispatch(loadNews("general"))
+        dispatch(loadNews(category))
         dispatch(loadSavedNews())
         dispatch(userInfoRequest())
     }, [dispatch]);

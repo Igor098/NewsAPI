@@ -2,7 +2,7 @@ import style from "../../Header/ui/style.module.scss";
 import { useState } from "react";
 import {IDropdownProps} from "../../../types/types.ts";
 
-export const Dropdown = ({mainText, elementsList}: IDropdownProps) => {
+export const Dropdown = ({mainText, elementsList, activeElement, setCategory}: IDropdownProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const openDropdown = () => {
@@ -15,8 +15,11 @@ export const Dropdown = ({mainText, elementsList}: IDropdownProps) => {
 
             <div className={`${style.dropdownMenu} ${isOpen ? style.open : ""}`}>
                 {
-                    elementsList && elementsList.map((name) => (
-                        <button key={name} className={`${style.dropdownItem} ${style.btnReset}`}>{name}</button>
+                    elementsList && elementsList.map((category) => (
+                        <button key={category.name}
+                                className={`${style.dropdownItem} ${style.btnReset} ${activeElement.includes(category.name) ? style.active : ""}`}
+                                onClick={setCategory}
+                        >{category.name}</button>
                     ))
                 }
             </div>

@@ -1,7 +1,7 @@
 import {ChangeEvent, FormEvent, useState} from "react";
 import {useDispatch} from "react-redux";
 import {RootDispatch} from "../../../store/store.ts";
-import {searchNews} from "../../../store/slices/newsSlice.ts";
+import {searchNews} from "../../../store/slices/news/newsSlice.ts";
 
 
 export const SearchForm = () => {

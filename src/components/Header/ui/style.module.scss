@@ -17,7 +17,6 @@
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  //background-color: style.$color-blue;
   padding: 1rem;
 }
 
@@ -56,12 +55,7 @@
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 
   &:hover {
-    background-color: style.$color-hover;
-    color: style.$color-white;
-
-    button {
-      color: style.$color-white;
-    }
+    background-color: style.$color-light-hover;
   }
 }
 
@@ -106,7 +100,7 @@
 
 /* Изменение фона при наведении на элемент меню */
 .dropdownItem:hover {
-  background-color: style.$color-hover;
+  background-color: style.$color-light-hover;
   color: style.$color-white;
 }
 
@@ -118,6 +112,10 @@
 .dropdownItem:last-child:hover {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+.active {
+  background-color: style.$color-light-hover;
 }
 
 .username {
@@ -132,6 +130,11 @@
   cursor: pointer;
   border: none;
   border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: style.$color-light-hover;
+  }
 }
 
 //.dropdown:hover .dropdownMenu {

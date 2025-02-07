@@ -5,6 +5,7 @@ import {RootDispatch, RootState} from "../../../store/store.ts";
 import {useEffect} from "react";
 import {loadSavedNews} from "../../../store/slices/favouritesSlice.ts";
 import style from "./style.module.scss";
+import {userInfoRequest} from "../../../store/slices/auth/authSlice.ts";
 
 
 export const FavouritesList = () => {
@@ -13,6 +14,10 @@ export const FavouritesList = () => {
 
     useEffect(() => {
         dispatch(loadSavedNews())
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(userInfoRequest())
     }, [dispatch]);
 
     if (loading) return <div className={style.loader}></div>;

@@ -1,3 +1,5 @@
+import { MouseEvent } from "react";
+
 export interface INewsItemProps {
     title: string;
     description: string | null;
@@ -83,6 +85,12 @@ export interface IDeletedNews {
 
 export interface IDropdownProps {
     mainText: string;
-    elementsList: Array<string>;
-    setCategory?: (e: MouseEvent, category:string) => void;
+    elementsList: Array<IDropdownCategory>;
+    activeElement: string;
+    setCategory?: (e: MouseEvent<HTMLButtonElement>) => void;
+}
+
+export interface IDropdownCategory{
+    state: string;
+    name: string;
 }

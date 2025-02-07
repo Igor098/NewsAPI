@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {fetchNews, fetchNewsByQuery} from "../../api/newsAPI.ts";
-import {INewsItemSource, INewsItemApiState, INewsState, INewsItemState} from "../../types/types.ts";
-import {generateUniqueId} from "../../utils/utils.ts";
+import {fetchNews, fetchNewsByQuery} from "../../../api/newsAPI.ts";
+import {INewsItemSource, INewsItemApiState, INewsState, INewsItemState} from "../../../types/types.ts";
+import {generateUniqueId} from "../../../utils/utils.ts";
 
 
 const initialState: INewsState = {
