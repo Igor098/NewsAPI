@@ -1,6 +1,6 @@
-import {IAuthState, ILoginModel, IRegisterModel, IUserModel} from "../../types/types.ts";
+import {IAuthState, ILoginModel, IRegisterModel, IUserModel} from "../../../types/types.ts";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {fetchLogin, fetchRegister, fetchUserInfo} from "../../api/authAPI.ts";
+import {fetchLogin, fetchLogout, fetchRegister, fetchUserInfo} from "../../../api/authAPI.ts";
 
 const initialState: IAuthState = {
     isAuthenticated: false,
@@ -32,11 +32,18 @@ export const userInfoRequest = createAsyncThunk(
     }
 )
 
+export const userLogoutRequest = createAsyncThunk(
+    'auth/logout',
+    async () => {
+        return await fetchLogout();
+    }
+)
+
 export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        logout(state) {
+        logoutUser(state) {
             state.isAuthenticated = false;
             state.username = null;
             state.email = null;
@@ -96,4 +103,5 @@ export const authSlice = createSlice({
     }
 })
 
+export const { logoutUser } = authSlice.actions;
 export default authSlice.reducer;

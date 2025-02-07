@@ -8,14 +8,14 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  background-color: style.$color-smoke-white;
+  background-color: style.$color-dark-gray;
   border-radius: 1rem;
 }
 
 .headerWrapper {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 2rem;
   //background-color: style.$color-blue;
   padding: 1rem;
@@ -30,7 +30,7 @@
 
 .navigationItem {
   a {
-    color: style.$color-dark-gray;
+    color: style.$color-smoke-white;
     text-decoration: none;
     font-size: 1rem;
     font-weight: 500;
@@ -47,10 +47,10 @@
 .dropdownToggle {
   min-width: 12rem;
   padding: 0.5rem 1rem;
-  background-color: style.$color-dark-gray; /* Цвет фона кнопки */
-  color: style.$color-white;
-  border: 1px solid style.$color-mostly-white;
+  background-color: style.$color-smoke-white; /* Цвет фона кнопки */
+  color: style.$color-dark-gray;
   cursor: pointer;
+  border: none;
   border-radius: 5px;
   font-size: 1em;
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
@@ -75,7 +75,7 @@
   border: 1px solid style.$color-light-gray;
   border-radius: 5px;
   z-index: 10;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  //box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transform: scale(0.95);
   pointer-events: none;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
@@ -118,6 +118,20 @@
 .dropdownItem:last-child:hover {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+.username {
+  font-size: 1em;
+  color: style.$color-smoke-white;
+}
+
+.btnLogout {
+  padding: 0.25rem 0.5rem;
+  background-color: style.$color-smoke-white;
+  color: style.$color-dark-gray;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
 }
 
 //.dropdown:hover .dropdownMenu {

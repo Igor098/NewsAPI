@@ -1,7 +1,8 @@
 import style from "../../Header/ui/style.module.scss";
 import { useState } from "react";
+import {IDropdownProps} from "../../../types/types.ts";
 
-export const Dropdown = () => {
+export const Dropdown = ({mainText, elementsList}: IDropdownProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const openDropdown = () => {
@@ -10,11 +11,14 @@ export const Dropdown = () => {
 
     return (
         <div className="dropdown">
-            <button className={`${style.dropdownToggle} btn-reset`} onClick={openDropdown}>Группировка: по имени</button>
+            <button className={`${style.dropdownToggle} ${style.btnReset})`} onClick={openDropdown}>{mainText}</button>
 
             <div className={`${style.dropdownMenu} ${isOpen ? style.open : ""}`}>
-                <button className={`${style.dropdownItem} btnReset`} data-group="name">имя</button>
-                <button className={`${style.dropdownItem} btnReset`} data-group="date">дата</button>
+                {
+                    elementsList && elementsList.map((name) => (
+                        <button key={name} className={`${style.dropdownItem} ${style.btnReset}`}>{name}</button>
+                    ))
+                }
             </div>
 
         </div>

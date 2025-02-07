@@ -10,7 +10,6 @@ const initialState: INewsState = {
     loading: false,
     newsError: null,
     category: 'general',
-    searchQuery: '',
 }
 
 export const loadNews = createAsyncThunk(
@@ -36,10 +35,6 @@ export const newsSlice = createSlice({
     reducers: {
         setCategory: (state, action: PayloadAction<string>) => {
             state.category = action.payload;
-        },
-
-        setSearchQuery: (state, action: PayloadAction<string>) => {
-            state.searchQuery = action.payload;
         },
 
         setArticles: (state, action: PayloadAction<Array<INewsItemState>>) => {
@@ -91,5 +86,5 @@ export const newsSlice = createSlice({
     }
 })
 
-export const {setCategory, setSearchQuery, setArticles, setSearchResults} = newsSlice.actions;
+export const {setCategory, setArticles, setSearchResults} = newsSlice.actions;
 export default newsSlice.reducer;

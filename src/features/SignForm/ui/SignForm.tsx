@@ -1,10 +1,11 @@
 import style from "../../SignForm/ui/style.module.scss";
-import {FormEvent, useEffect, useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import { loginRequest } from "../../../store/slices/authSlice.ts";
-import {ILoginModel} from "../../../types/types.ts";
-import {RootDispatch, RootState} from "../../../store/store.ts";
-import {useNavigate} from "react-router-dom";
+import { FormEvent, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginRequest } from "../../../store/slices/auth/authSlice.ts";
+import { ILoginModel } from "../../../types/types.ts";
+import { RootDispatch } from "../../../store/store.ts";
+import { useNavigate } from "react-router-dom";
+import { selectIsAuthenticated } from "../../../store/slices/auth/authSelectors.ts";
 
 export const SignForm = () => {
 
@@ -15,7 +16,7 @@ export const SignForm = () => {
     const errRef = useRef(null);
     const navigate = useNavigate();
 
-    const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+    const isAuthenticated = useSelector(selectIsAuthenticated);
     const dispatch: RootDispatch = useDispatch();
 
     useEffect(() => {

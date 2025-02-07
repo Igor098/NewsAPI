@@ -42,7 +42,6 @@ export interface INewsState {
     loading: boolean;
     newsError: string | null;
     category: string;
-    searchQuery: string;
 }
 
 export interface IFavouritesNewsState {
@@ -80,4 +79,10 @@ export interface IUserModel {
 
 export interface IDeletedNews {
     id: string;
+}
+
+export interface IDropdownProps {
+    mainText: string;
+    elementsList: Array<string>;
+    setCategory?: (e: MouseEvent, category:string) => void;
 }

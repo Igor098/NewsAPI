@@ -2,12 +2,11 @@ import style from "./style.module.scss";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { RootDispatch } from "../../../store/store.ts";
-import { registerRequest } from "../../../store/slices/authSlice.ts";
+import { registerRequest } from "../../../store/slices/auth/authSlice.ts";
 import { IRegisterModel } from "../../../types/types.ts";
+import { EMAIL_REGEX, PWD_REGEX, USER_REGEX } from "../../../utils/regulars.ts";
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-const EMAIL_REGEX = /^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$/
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%_-]).{8,24}$/;
+
 
 export const RegisterForm = () => {
 

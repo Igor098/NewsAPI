@@ -5,15 +5,16 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootDispatch, RootState} from "../../../store/store.ts";
 import {loadNews} from "../../../store/slices/newsSlice.ts";
 import style from "./style.module.scss";
-import {userInfoRequest} from "../../../store/slices/authSlice.ts";
+import {userInfoRequest} from "../../../store/slices/auth/authSlice.ts";
 import {useNavigate} from "react-router-dom";
 import {loadSavedNews} from "../../../store/slices/favouritesSlice.ts";
+import {selectError} from "../../../store/slices/auth/authSelectors.ts";
 
 
 export const NewsList = () => {
     const {newsArticles, searchResults, loading, newsError} = useSelector((state: RootState) => state.news);
     const {articles} = useSelector((state: RootState) => state.favourites)
-    const {error} = useSelector((state:RootState) => state.auth);
+    const error = useSelector(selectError);
     const dispatch: RootDispatch = useDispatch();
     const navigate = useNavigate();
 
