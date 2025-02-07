@@ -26,7 +26,7 @@ export const NewsList = () => {
         dispatch(loadNews(category))
         dispatch(loadSavedNews())
         dispatch(userInfoRequest())
-    }, [dispatch]);
+    }, [dispatch, category]);
 
     useEffect(() => {
         if (error === "ERR_BAD_REQUEST") {

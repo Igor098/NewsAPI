@@ -87,7 +87,7 @@ export interface IDropdownProps {
     mainText: string;
     elementsList: Array<IDropdownCategory>;
     activeElement: string;
-    setCategory?: (e: MouseEvent<HTMLButtonElement>) => void;
+    onClickElement?: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export interface IDropdownCategory{
