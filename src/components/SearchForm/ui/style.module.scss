@@ -1,0 +1,32 @@
+@use "../../../styles/global" as style;
+
+
+.searchForm {
+  display: flex;
+  align-items: center;
+}
+
+.searchField {
+  border: 2px solid style.$color-smoke-white;
+  border-radius: 0.5rem;
+  outline-width: 0;
+  padding: 0.25rem 2rem 0.25rem 1rem;
+  font-size: 1em;
+}
+
+.searchBtn {
+  @include style.btnReset;
+  position: relative;
+}
+
+.searchBtnImage {
+  position: absolute;
+  right: 0.5rem;
+  top: -0.75rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke: style.$color-dark-gray;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

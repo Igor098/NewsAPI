@@ -1,17 +1,25 @@
-@use '../../../styles/global';
+@use '../../../styles/global' as style;
 
+
+.header {
+  margin: 2rem 0;
+  padding: 0 1rem;
+}
 
 .container {
-  max-width: 1280px;
+  max-width: 75rem;;
   margin: 0 auto;
-  padding: 2rem;
+  background-color: style.$color-dark-gray;
+  border-radius: 1rem;
 }
 
 .headerWrapper {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 2rem;
+  padding: 1rem;
 }
 
 .navigationList {
@@ -19,4 +27,70 @@
   align-items: center;
   justify-content: flex-end;
   gap: 1rem;
+}
+
+.navigationItem {
+  position: relative;
+  a {
+    color: style.$color-smoke-white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+  }
+
+  a:hover {
+    color: style.$color-yellow;
+  }
+
+  &::after {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    width: 0;
+    background-color: style.$color-yellow;
+    transition: width 0.3s ease-in-out;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+.username {
+  font-size: 1em;
+  color: style.$color-smoke-white;
+}
+
+.btnLogout {
+  @include style.btnReset;
+  padding: 0.25rem 0.5rem;
+  background-color: style.$color-smoke-white;
+  color: style.$color-dark-gray;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: style.$color-light-hover;
+  }
+}
+
+@media (max-width: 62rem) {
+  .header {
+    margin: 0 0 2rem 0;
+  }
+
+  .container {
+    border-radius: 0 0 1rem 1rem;
+  }
+
+  .headerWrapper {
+    justify-content: center;
+    gap: 1rem;
+  }
 }

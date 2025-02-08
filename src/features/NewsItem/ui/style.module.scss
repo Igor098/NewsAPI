@@ -1,0 +1,104 @@
+@use "../../../styles/global" as style;
+
+
+.newsCard {
+  position: relative;
+  border: 1px solid style.$color-light-gray;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: style.$color-white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.newsWrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding-inline: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.image {
+  max-height: 13.75rem;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+}
+
+.title {
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  color: style.$color-black;
+}
+
+.sourceLink {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.description {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.75rem;
+  color: style.$color-black;
+}
+
+.addFavourite {
+  @include style.btnReset;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.addFavouriteImage {
+  width: 3rem;
+  height: 3rem;
+  stroke-width: 1px;
+  stroke-linejoin: round;
+}
+
+.active {
+  stroke: style.$color-dark-gray;
+  fill: style.$color-yellow;
+}
+
+.notAdded {
+  stroke: style.$color-dark-gray;
+  fill: style.$color-smoke-white;
+}
+
+.loading {
+  stroke: style.$color-dark-gray;
+  animation: loadingAnim 2s infinite linear;
+}
+
+.newsCard:only-child {
+  max-width: 24rem;
+  margin: 0 auto;
+}
+
+@keyframes loadingAnim {
+  0%,19% {fill: style.$color-smoke-white;}
+  20%, 39% {fill: style.$color-yellow}
+  40%, 59% {fill: style.$color-smoke-white;}
+  60%, 79% {fill: style.$color-yellow}
+  80%,100% {fill: style.$color-smoke-white;}
+}

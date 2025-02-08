@@ -1,0 +1,99 @@
+@use '../../../styles/global' as style;
+
+
+.registerForm {
+  max-width: 24rem;
+  display: grid;
+  justify-content: center;
+  grid-row-gap: 2rem;
+  background-color: style.$color-mostly-white;
+  border-radius: 1.5rem;
+  color: style.$color-black;
+  padding: 1rem 5rem;
+  filter: drop-shadow(0 17px 17px rgba(92, 99, 107, 0.1))
+}
+
+.title {
+  font-family: "Roboto", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 2rem 0 0 0;
+  text-align: center;
+}
+
+.formField {
+  position: relative;
+  display: grid;
+  border: none;
+  padding: 0;
+}
+
+.formLabel {
+  display: grid;
+  text-align: start;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  transform: translate(1rem, 2rem);
+  z-index: -1;
+  transition: transform 0.2s ease-out;
+}
+
+.formInput {
+  min-height: 2.5rem;
+  border: 2px solid style.$color-light-gray;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  outline-width: 0;
+
+  &:focus {
+    border: 2px solid style.$color-blue;
+  }
+}
+
+.formField:focus-within .formLabel,
+.formLabel.active {
+  transform: translate(0, -0.25rem);
+  z-index: 0;
+}
+
+.buttonSubmit {
+  @include style.btnReset;
+  margin-bottom: 2rem;
+  padding-block: 1rem;
+  border-radius: 0.75rem;
+  background-color: style.$color-blue;
+  color: style.$color-white;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.instructions {
+  font-size: 0.75rem;
+  border-radius: 0.5rem;
+  color: style.$color-red;
+  position: relative;
+  margin: 0;
+  padding-top: 0.25rem;
+  text-align: start;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+.notValid {
+  border: 2px solid style.$color-red;
+}
+
+@media (max-width: 30rem) {
+  .title {
+    font-size: 2rem;
+  }
+  .registerForm {
+    padding: 1rem 2rem;
+    grid-row-gap: 1rem;
+  }
+}

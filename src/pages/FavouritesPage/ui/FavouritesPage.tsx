@@ -1,7 +1,10 @@
+import { FavouritesList } from "../../../features/FavouritesList";
+import style from "./style.module.scss";
+
 export const FavouritesPage = () => {
     return (
-        <div>
-            <h1>FavouritesPage</h1>
+        <div className={style.newsContainer}>
+            <FavouritesList />
         </div>
     )
 }
