@@ -11,13 +11,13 @@ export const Dropdown = ({mainText, elementsList, activeElement, onClickElement}
 
     return (
         <div className="dropdown">
-            <button className={`${style.dropdownToggle} ${style.btnReset})`} onClick={openDropdown}>{mainText}</button>
+            <button className={style.dropdownToggle} onClick={openDropdown}>{mainText}</button>
 
             <div className={`${style.dropdownMenu} ${isOpen ? style.open : ""}`}>
                 {
                     elementsList && elementsList.map((category) => (
                         <button key={category.name}
-                                className={`${style.dropdownItem} ${style.btnReset} ${activeElement.includes(category.name) ? style.active : ""}`}
+                                className={`${style.dropdownItem} ${activeElement.includes(category.name) ? style.active : ""}`}
                                 onClick={onClickElement}
                         >{category.name}</button>
                     ))

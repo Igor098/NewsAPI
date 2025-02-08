@@ -60,15 +60,45 @@
 }
 
 .addFavourite {
-  position: sticky;
+  @include style.btnReset;
+  position: absolute;
+  top: 0;
+  right: 0;
   z-index: 10;
-  background-color: style.$color-dark-gray;
-  color: style.$color-smoke-white;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
+}
 
-  &:hover {
-    background-color: style.$color-dark-hover;
-  }
+.addFavouriteImage {
+  width: 3rem;
+  height: 3rem;
+  stroke-width: 1px;
+  stroke-linejoin: round;
+}
+
+.active {
+  stroke: style.$color-dark-gray;
+  fill: style.$color-yellow;
+}
+
+.notAdded {
+  stroke: style.$color-dark-gray;
+  fill: style.$color-smoke-white;
+}
+
+.loading {
+  stroke: style.$color-dark-gray;
+  animation: loadingAnim 2s infinite linear;
+}
+
+.newsCard:only-child {
+  max-width: 24rem;
+  margin: 0 auto;
+}
+
+@keyframes loadingAnim {
+  0%,19% {fill: style.$color-smoke-white;}
+  20%, 39% {fill: style.$color-yellow}
+  40%, 59% {fill: style.$color-smoke-white;}
+  60%, 79% {fill: style.$color-yellow}
+  80%,100% {fill: style.$color-smoke-white;}
 }

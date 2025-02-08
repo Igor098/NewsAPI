@@ -1,11 +1,11 @@
-import './App.scss'
 import { Header } from "./components/Header";
 import {BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { MainPage, FavouritesPage } from "./pages";
-import {Provider as ReduxProvider} from "react-redux";
-import {store} from "./store/store.ts";
-import {RegisterPage} from "./pages/RegisterPage/";
-import {SignPage} from "./pages/SignPage";
+import { Provider as ReduxProvider } from "react-redux";
+import { store } from "./store/store.ts";
+import { RegisterPage } from "./pages/RegisterPage/";
+import { SignPage } from "./pages/SignPage";
+import "./styles/global.scss";
 
 function App(){
 

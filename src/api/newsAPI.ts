@@ -1,9 +1,7 @@
 import axios from "axios";
 import {INewsItemSource} from "../types/types.ts";
 
-// const API_KEY = "5f777462f83a476d90fc7548ea004ff3";
-// const BASE_URL = "https://newsapi.org/v2/everything";
-const API_KEY = "8cd470fc90df75c1226666a611f26e92";
+const API_KEY = "443883ef4c0baa257002a3a8759a110d";
 const BASE_URL = "https://gnews.io/api/v4/top-headlines";
 const SEARCH_URL = "https://gnews.io/api/v4/search";
 

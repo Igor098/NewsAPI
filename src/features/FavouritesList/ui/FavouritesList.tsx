@@ -1,15 +1,19 @@
-import {INewsItemState} from "../../../types/types.ts";
-import {NewsItem} from "../../NewsItem/ui/NewsItem.tsx";
-import {useDispatch, useSelector} from "react-redux";
-import {RootDispatch, RootState} from "../../../store/store.ts";
-import {useEffect} from "react";
-import {loadSavedNews} from "../../../store/slices/favouritesSlice.ts";
-import style from "./style.module.scss";
-import {userInfoRequest} from "../../../store/slices/auth/authSlice.ts";
+import { INewsItemState } from "../../../types/types.ts";
+import { NewsItem } from "../../NewsItem/ui/NewsItem.tsx";
+import { useDispatch, useSelector } from "react-redux";
+import { RootDispatch } from "../../../store/store.ts";
+import { useEffect } from "react";
+import { loadSavedNews } from "../../../store/slices/favourites/favouritesSlice.ts";
+import { userInfoRequest } from "../../../store/slices/auth/authSlice.ts";
+import { Loader } from "../../../components/Loader";
+import { selectArticles, selectLoading, selectError } from "../../../store/slices/favourites/favouritesSelector.ts";
+
 
 
 export const FavouritesList = () => {
-    const {articles, loading, error} = useSelector((state: RootState) => state.favourites);
+    const articles = useSelector(selectArticles);
+    const loading = useSelector(selectLoading);
+    const error = useSelector(selectError);
     const dispatch: RootDispatch = useDispatch();
 
     useEffect(() => {
@@ -20,7 +24,8 @@ export const FavouritesList = () => {
         dispatch(userInfoRequest())
     }, [dispatch]);
 
-    if (loading) return <div className={style.loader}></div>;
+    if (articles.length === 0) return <p>У вас нет сохраненных новостей</p>;
+    if (loading) return <Loader />;
     if (error) return <p>Error: {error}</p>;
 
     return (

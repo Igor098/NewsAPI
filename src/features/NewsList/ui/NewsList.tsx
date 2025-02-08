@@ -1,20 +1,30 @@
-import {useEffect} from "react";
-import {INewsItemState} from "../../../types/types.ts";
-import {NewsItem} from "../../NewsItem/ui/NewsItem.tsx";
-import {useDispatch, useSelector} from "react-redux";
-import {RootDispatch, RootState} from "../../../store/store.ts";
-import {loadNews} from "../../../store/slices/news/newsSlice.ts";
-import style from "./style.module.scss";
-import {userInfoRequest} from "../../../store/slices/auth/authSlice.ts";
-import {useNavigate} from "react-router-dom";
-import {loadSavedNews} from "../../../store/slices/favouritesSlice.ts";
-import {selectError} from "../../../store/slices/auth/authSelectors.ts";
-import {selectCategory} from "../../../store/slices/news/newsSelector.ts";
+import { useEffect } from "react";
+import { INewsItemState } from "../../../types/types.ts";
+import { NewsItem } from "../../NewsItem/ui/NewsItem.tsx";
+import { useDispatch, useSelector } from "react-redux";
+import { RootDispatch } from "../../../store/store.ts";
+import {loadNews, setSearchResults } from "../../../store/slices/news/newsSlice.ts";
+import { userInfoRequest } from "../../../store/slices/auth/authSlice.ts";
+import { useNavigate } from "react-router-dom";
+import { loadSavedNews } from "../../../store/slices/favourites/favouritesSlice.ts";
+import { selectError } from "../../../store/slices/auth/authSelectors.ts";
+import {
+    selectCategory,
+    selectLoading,
+    selectNewsArticles,
+    selectNewsError,
+    selectSearchResults
+} from "../../../store/slices/news/newsSelector.ts";
+import { Loader } from "../../../components/Loader";
+import { selectArticles } from "../../../store/slices/favourites/favouritesSelector.ts";
 
 
 export const NewsList = () => {
-    const {newsArticles, searchResults, loading, newsError} = useSelector((state: RootState) => state.news);
-    const {articles} = useSelector((state: RootState) => state.favourites)
+    const newsArticles = useSelector(selectNewsArticles);
+    const searchResults = useSelector(selectSearchResults);
+    const loading = useSelector(selectLoading);
+    const newsError = useSelector(selectNewsError);
+    const articles = useSelector(selectArticles)
     const error = useSelector(selectError);
     const category = useSelector(selectCategory)
     const dispatch: RootDispatch = useDispatch();
@@ -23,18 +33,19 @@ export const NewsList = () => {
     const displayedArticles = searchResults.length > 0 ? searchResults : newsArticles;
 
     useEffect(() => {
+        dispatch(setSearchResults([]))
         dispatch(loadNews(category))
         dispatch(loadSavedNews())
         dispatch(userInfoRequest())
     }, [dispatch, category]);
 
     useEffect(() => {
-        if (error === "ERR_BAD_REQUEST") {
+        if (error) {
             navigate("/login")
         }
     }, [error, navigate]);
 
-    if (loading) return <div className={style.loader}></div>;
+    if (loading) return <Loader />;
     if (newsError) return <p>Error: {newsError}</p>;
 
     const updatedArticles = articles && displayedArticles.map((article: INewsItemState) => {

@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import newsReducer from "./slices/news/newsSlice.ts";
-import favouritesNewsReducer from "./slices/favouritesSlice";
+import favouritesNewsReducer from "./slices/favourites/favouritesSlice.ts";
 import authReducer from "./slices/auth/authSlice.ts";
 
 

@@ -7,7 +7,6 @@ export const SignPage = () => {
             <div className={style.container}>
                 <SignForm />
             </div>
-
         </section>
     )
 }

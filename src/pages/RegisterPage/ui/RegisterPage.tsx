@@ -1,4 +1,4 @@
-import {RegisterForm} from "../../../features/RegisterForm";
+import { RegisterForm } from "../../../features/RegisterForm";
 import style from "./style.module.scss";
 
 export const RegisterPage = () => {

@@ -1,6 +1,6 @@
-import {IDeletedNews, IFavouritesNewsState, INewsItemState} from "../../types/types";
+import {IDeletedNews, IFavouritesNewsState, INewsItemState} from "../../../types/types.ts";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {fetchAddNews, fetchDeleteNews, fetchSavedNews} from "../../api/authAPI.ts";
+import {fetchAddNews, fetchDeleteNews, fetchSavedNews} from "../../../api/authAPI.ts";
 
 
 const initialState: IFavouritesNewsState = {

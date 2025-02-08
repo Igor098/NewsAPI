@@ -2,13 +2,22 @@
 @use "colors" as colors;
 @forward "colors";
 
+html {
+  overflow-x: hidden;
+}
+
+body {
+  background-color: colors.$color-mostly-white;
+  overflow-x: hidden;
+}
+
 .listReset {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.btnReset {
+@mixin btnReset {
   padding: 0;
   border: none;
   background-color: transparent;
@@ -17,13 +26,17 @@
 
 .newsContainer {
   display: grid;
-  max-width: 1200px;
+  max-width: 75rem;
   margin: 0 auto;
   grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
   justify-content: center;
+  justify-items: center;
   gap: 1rem;
+  padding: 0 1rem;
 }
 
-body {
-  background-color: colors.$color-mostly-white;
+@media (max-width: 30rem) {
+  .newsContainer {
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  }
 }

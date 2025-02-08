@@ -1,4 +1,4 @@
-import {FavouritesList} from "../../../features/FavouritesList";
+import { FavouritesList } from "../../../features/FavouritesList";
 import style from "./style.module.scss";
 
 export const FavouritesPage = () => {

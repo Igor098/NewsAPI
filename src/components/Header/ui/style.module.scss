@@ -3,10 +3,11 @@
 
 .header {
   margin: 2rem 0;
+  padding: 0 1rem;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 75rem;;
   margin: 0 auto;
   background-color: style.$color-dark-gray;
   border-radius: 1rem;
@@ -14,6 +15,7 @@
 
 .headerWrapper {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
@@ -28,11 +30,33 @@
 }
 
 .navigationItem {
+  position: relative;
   a {
     color: style.$color-smoke-white;
     text-decoration: none;
     font-size: 1rem;
     font-weight: 500;
+    transition: color 0.3s ease-in-out;
+  }
+
+  a:hover {
+    color: style.$color-yellow;
+  }
+
+  &::after {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    width: 0;
+    background-color: style.$color-yellow;
+    transition: width 0.3s ease-in-out;
+  }
+
+  &:hover::after {
+    width: 100%;
   }
 }
 
@@ -42,6 +66,7 @@
 }
 
 .btnLogout {
+  @include style.btnReset;
   padding: 0.25rem 0.5rem;
   background-color: style.$color-smoke-white;
   color: style.$color-dark-gray;
@@ -55,9 +80,17 @@
   }
 }
 
-//.dropdown:hover .dropdownMenu {
-//  display: grid;
-//  opacity: 1;
-//  justify-items: center;
-//  animation: dropdownMenu 0.5s;
-//}
+@media (max-width: 62rem) {
+  .header {
+    margin: 0 0 2rem 0;
+  }
+
+  .container {
+    border-radius: 0 0 1rem 1rem;
+  }
+
+  .headerWrapper {
+    justify-content: center;
+    gap: 1rem;
+  }
+}

@@ -1,5 +1,5 @@
 import style from './style.module.scss';
-import { Link, useLocation } from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import { SearchForm } from "../../SearchForm";
 import { Dropdown } from "../../Dropdown";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +8,7 @@ import { RootDispatch } from "../../../store/store.ts";
 import {logoutUser, userLogoutRequest} from "../../../store/slices/auth/authSlice.ts";
 import { selectCategory } from "../../../store/slices/news/newsSelector.ts";
 import { MouseEvent } from "react";
-import { loadNews, setCategory } from "../../../store/slices/news/newsSlice.ts";
+import {loadNews, setCategory, setSearchResults} from "../../../store/slices/news/newsSlice.ts";
 import { categories } from "../../../utils/categories.ts";
 
 export const Header = () => {
@@ -16,12 +16,18 @@ export const Header = () => {
     const username: string | null = useSelector(selectUsername);
     const category: string = useSelector(selectCategory);
     const dispatch: RootDispatch = useDispatch();
-    const location = useLocation()
+    const location = useLocation();
+    const navigate = useNavigate();
     const activeCategory: string = categories.filter((element) => element.state === category).map((element) => element.name)[0]
 
     const logout = () => {
         dispatch(userLogoutRequest());
         dispatch(logoutUser());
+        navigate("/login");
+    }
+
+    const updateSearch = () => {
+        dispatch(setSearchResults([]))
     }
 
     const loadNewsByCategory = (e: MouseEvent<HTMLButtonElement>) => {
@@ -33,7 +39,6 @@ export const Header = () => {
                 .map((element) => element.state)[0]
             :
             "general";
-        console.log(category)
         dispatch(setCategory(category))
         dispatch(loadNews(category))
     }
@@ -44,7 +49,7 @@ export const Header = () => {
                 <div className={style.headerWrapper}>
                     <nav>
                         <ul className={`${style.navigationList} ${style.listReset}`}>
-                            <li className={style.navigationItem}>
+                            <li className={style.navigationItem} onClick={updateSearch}>
                                 <Link to='/'>Все новости</Link>
                             </li>
 

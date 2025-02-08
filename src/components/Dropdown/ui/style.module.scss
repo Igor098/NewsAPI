@@ -9,8 +9,9 @@
 }
 
 .dropdownToggle {
+  @include style.btnReset;
   min-width: 12rem;
-  padding: 0.5rem 1rem;
+  padding: 0.35rem 1rem;
   background-color: style.$color-smoke-white; /* Цвет фона кнопки */
   color: style.$color-dark-gray;
   cursor: pointer;
@@ -30,11 +31,11 @@
   display: grid;
   justify-items: center;
   opacity: 0;
-  background-color: style.$color-mostly-white;
+  background-color: style.$color-smoke-white;
   border: 1px solid style.$color-light-gray;
   border-radius: 5px;
-  z-index: 10;
-  //box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 20;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transform: scale(0.95);
   pointer-events: none;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
@@ -48,11 +49,12 @@
 
 /* Стиль для элементов в выпадающем меню */
 .dropdownItem {
+  @include style.btnReset;
   width: 100%;
   padding: 0.5rem 1rem;
   cursor: pointer;
-  color: style.$color-black;
-  border-bottom: 1px solid style.$color-light-gray;
+  color: style.$color-dark-gray;
+  border-bottom: 1px solid style.$color-white;
   font-size: 0.9em;
   z-index: 100;
   transition: background-color .3s ease-in-out, color .3s ease-in-out;
@@ -64,9 +66,8 @@
 }
 
 /* Изменение фона при наведении на элемент меню */
-.dropdownItem:hover {
+.dropdownItem:not(.active):hover {
   background-color: style.$color-light-hover;
-  color: style.$color-white;
 }
 
 .dropdownItem:first-child:hover {
@@ -80,5 +81,11 @@
 }
 
 .active {
-  background-color: style.$color-light-hover;
+  background-color: style.$color-dark-gray;
+  color: style.$color-smoke-white;
+
+  &:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
 }

@@ -1,10 +1,5 @@
 import { MouseEvent } from "react";
 
-export interface INewsItemProps {
-    title: string;
-    description: string | null;
-    url: string;
-}
 
 export interface INewsItemSource {
     totalArticles: number;

@@ -12,7 +12,7 @@ const ADD_NEWS_URL = "/news/add/";
 const DELETE_NEWS_URL = "/news/delete/";
 
 export const api = axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: 'https://fl.greatdragonx.su:8000',
     headers: {
         'Content-Type': 'application/json',
     },
@@ -26,7 +26,6 @@ api.interceptors.response.use(
 
         // Если ошибка 401 и запрос не на refresh
         if (error.response?.status === 401 && !originalRequest._retry) {
-            console.log("Ошибка произошла!")
             originalRequest._retry = true; // Чтобы не зациклить запрос
 
             try {

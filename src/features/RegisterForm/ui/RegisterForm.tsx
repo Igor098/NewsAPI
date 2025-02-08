@@ -5,30 +5,36 @@ import { RootDispatch } from "../../../store/store.ts";
 import { registerRequest } from "../../../store/slices/auth/authSlice.ts";
 import { IRegisterModel } from "../../../types/types.ts";
 import { EMAIL_REGEX, PWD_REGEX, USER_REGEX } from "../../../utils/regulars.ts";
-
+import {useNavigate} from "react-router-dom";
 
 
 export const RegisterForm = () => {
 
     // const { error, loading } = useSelector((state: RootState) => state.auth);
     const dispatch: RootDispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const handleRegister = (e: FormEvent) => {
+    const handleRegister = async (e: FormEvent) => {
         e.preventDefault()
 
         const testUsername = USER_REGEX.test(name);
         const testEmail = EMAIL_REGEX.test(email);
         const testPassword = PWD_REGEX.test(password);
         const testConfirm = password === confirm;
-
-        if (testUsername && testEmail && testPassword && testConfirm) {
-            const body: IRegisterModel = {
-                username: name,
-                email: email,
-                password: password,
-                confirm_password: confirm,
+        try {
+            if (testUsername && testEmail && testPassword && testConfirm) {
+                const body: IRegisterModel = {
+                    username: name,
+                    email: email,
+                    password: password,
+                    confirm_password: confirm,
+                }
+                const answer = await dispatch(registerRequest(body)).unwrap();
+                console.log(answer)
+                navigate("/login");
             }
-            dispatch(registerRequest(body))
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -212,7 +218,7 @@ export const RegisterForm = () => {
                 </p>
             </fieldset>
 
-            <button className={`${style.buttonSubmit} btnReset`} type={"submit"}>Зарегистрироваться</button>
+            <button className={`${style.buttonSubmit}`} type={"submit"}>Зарегистрироваться</button>
 
         </form>
     )
